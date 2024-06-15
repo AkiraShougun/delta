@@ -44,4 +44,6 @@ fn fetch_random_character(){
         }
         Err(error) => println!("Error: {:#?}", error),
     }
+
+    //lmfdb commands start here
 }
