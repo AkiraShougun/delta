@@ -1,4 +1,5 @@
 
-pub fn create_file(){
-    _ = std::fs::write("./temp.txt", "Write here something");
+pub fn create_file(content:&String,filename:&String){
+    let path = format!("./{0}",filename); 
+    _ = std::fs::write(path, content);
 }

@@ -11,7 +11,9 @@ fn main(){
         )   
     ).subcommand(
         Command::new("randchar").about("Gets a random anime character")
-    ).subcommand(Command::new("fc")).about("Creates a txt file.")
+    ).subcommand(Command::new("fc").about("Creates a txt file.")
+    .arg(Arg::new("content")).arg(Arg::new("filename"))
+    )
     .get_matches();
 
     // let print_val = matcher.subcommand_matches("print");
@@ -27,8 +29,10 @@ fn main(){
         randchar::fetch_random_character();
     }
 
-    if let Some(_) = matcher.subcommand_matches("fc"){
-        fs::create_file();
+    if let Some(file_matches) = matcher.subcommand_matches("fc"){
+        let content = file_matches.get_one::<String>("content").unwrap();
+        let name = file_matches.get_one::<String>("filename").unwrap();
+        fs::create_file(content,name);
     }
 
 }
