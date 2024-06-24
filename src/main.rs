@@ -13,6 +13,8 @@ fn main(){
         Command::new("randchar").about("Gets a random anime character")
     ).subcommand(Command::new("fc").about("Creates a txt file.")
     .arg(Arg::new("content")).arg(Arg::new("filename"))
+    ).subcommand(Command::new("cd").about("Makes a directory.")
+        .arg(Arg::new("filename"))
     )
     .get_matches();
 
@@ -33,6 +35,11 @@ fn main(){
         let content = file_matches.get_one::<String>("content").unwrap();
         let name = file_matches.get_one::<String>("filename").unwrap();
         fs::create_file(content,name);
+    }
+
+    if let Some(file_matches) = matcher.subcommand_matches("cd"){
+        let name = file_matches.get_one::<String>("filename").unwrap();
+        fs::create_dir(name);
     }
 
 }
